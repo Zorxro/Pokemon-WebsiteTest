@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Details - PokéTCG Card Collector</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">⚡</span>
+                <span class="brand-text">PokéTCG</span>
+                <span class="beta-badge">Beta</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#sets">Sets</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Set Detail Header -->
+    <section class="set-detail-header">
+        <div class="main-content">
+            <a href="index.html" class="back-button">← Back to Sets</a>
+            <h1 class="set-detail-title" id="set-title">Loading...</h1>
+            <p class="set-detail-info" id="set-info">Loading set information...</p>
+        </div>
+    </section>
+
+    <!-- Cards Grid -->
+    <main class="main-content">
+        <div class="filters-container">
+            <input type="text" placeholder="Search cards..." class="filter-search" id="card-search">
+            <select class="filter-select" id="rarity-filter">
+                <option value="">All Rarities</option>
+                <option value="common">Common</option>
+                <option value="uncommon">Uncommon</option>
+                <option value="rare">Rare</option>
+                <option value="rare-holo">Rare Holo</option>
+                <option value="rare-ultra">Ultra Rare</option>
+            </select>
+            <select class="filter-select" id="type-filter">
+                <option value="">All Types</option>
+                <option value="pokemon">Pokémon</option>
+                <option value="trainer">Trainer</option>
+                <option value="energy">Energy</option>
+            </select>
+        </div>
+
+        <div class="cards-grid" id="cards-grid">
+            <!-- Cards will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <script src="../js/set.js"></script>
+</body>
+</html>

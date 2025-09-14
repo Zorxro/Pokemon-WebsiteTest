@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Price - PokéTCG Card Collector</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">⚡</span>
+                <span class="brand-text">PokéTCG</span>
+                <span class="beta-badge">Beta</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#sets">Sets</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Price Header -->
+    <section class="price-header">
+        <div class="main-content">
+            <a href="#" class="back-button" id="back-to-set">← Back to Set</a>
+            <h1 id="card-title">Loading...</h1>
+            <p id="card-subtitle">Card pricing information</p>
+        </div>
+    </section>
+
+    <!-- Card Details and Pricing -->
+    <main class="price-content">
+        <div class="card-details">
+            <div class="card-image-large" id="card-image">
+                Card Image Placeholder
+            </div>
+            <div class="price-info">
+                <h3>Current Market Prices</h3>
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Price Range</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody id="price-table-body">
+                        <tr>
+                            <td>Near Mint</td>
+                            <td>$--</td>
+                            <td>Loading...</td>
+                        </tr>
+                        <tr>
+                            <td>Lightly Played</td>
+                            <td>$--</td>
+                            <td>Loading...</td>
+                        </tr>
+                        <tr>
+                            <td>Moderately Played</td>
+                            <td>$--</td>
+                            <td>Loading...</td>
+                        </tr>
+                        <tr>
+                            <td>Heavily Played</td>
+                            <td>$--</td>
+                            <td>Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Card Information</h3>
+                <div id="card-details-info">
+                    <p><strong>Set:</strong> <span id="card-set">Loading...</span></p>
+                    <p><strong>Card Number:</strong> <span id="card-number">Loading...</span></p>
+                    <p><strong>Rarity:</strong> <span id="card-rarity">Loading...</span></p>
+                    <p><strong>Type:</strong> <span id="card-type">Loading...</span></p>
+                    <p><strong>Artist:</strong> <span id="card-artist">Loading...</span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/card.js"></script>
+</body>
+</html>

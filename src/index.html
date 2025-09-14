@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéTCG Card Collector</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">¡</span>
+                <span class="brand-text">PokéTCG</span>
+                <span class="beta-badge">Beta</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#sets">Sets</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Explore every<br>Pokémon TCG set.</h1>
+                <p>Browse expansions, drill into card lists, and track details  all in one fast, searchable site.</p>
+                
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <input type="text" placeholder="Search sets or cards... (e.g. Lugia, SV8, Cosmic Eclipse)" class="search-input">
+                    <button class="search-btn">Search</button>
+                </div>
+
+                <!-- Quick Pick Tags -->
+                <div class="quick-picks">
+                    <span class="quick-pick-label">Quick picks:</span>
+                    <button class="tag-btn" data-series="sv">Scarlet & Violet</button>
+                    <button class="tag-btn" data-series="swsh">Sword & Shield</button>
+                    <button class="tag-btn" data-series="sm">Sun & Moon</button>
+                    <button class="tag-btn" data-series="xy">XY</button>
+                    <button class="tag-btn" data-series="bw">Black & White</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="set-showcase">SV8</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="sets-section">
+            <h2>All Pokémon TCG Sets</h2>
+            <p class="sets-description">Browse every set, filter by series or year, and click a set to view its cards.</p>
+
+            <!-- Filters -->
+            <div class="filters-container">
+                <input type="text" placeholder="Search by set name or series..." class="filter-search">
+                <select class="filter-select" id="series-filter">
+                    <option value="">All Series</option>
+                    <option value="sv">Scarlet & Violet</option>
+                    <option value="swsh">Sword & Shield</option>
+                    <option value="sm">Sun & Moon</option>
+                </select>
+                <select class="filter-select" id="year-filter">
+                    <option value="">All Years</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                </select>
+                <select class="filter-select" id="sort-filter">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="alphabetical">Alphabetical</option>
+                </select>
+                <label class="checkbox-container">
+                    <input type="checkbox" id="group-by-series" checked>
+                    <span class="checkmark"></span>
+                    Group by series
+                </label>
+            </div>
+
+            <!-- Sets Grid -->
+            <div class="sets-grid" id="sets-grid">
+                <!-- Sets will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
