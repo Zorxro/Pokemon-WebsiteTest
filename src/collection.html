@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Collection - PokéTCG Card Collector</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">⚡</span>
+                <span class="brand-text">PokéTCG</span>
+                <span class="beta-badge">Beta</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#sets">Sets</a>
+                <a href="#how-it-works">How it works</a>
+                <a href="#about">About</a>
+                <a href="account.html" id="user-menu-toggle" class="user-menu-link">Account</a>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <button class="language-toggle" onclick="toggleLanguageDropdown()">
+                        <span class="language-flag" id="current-flag">🇺🇸</span>
+                        <span class="current-language">English</span>
+                        <span style="font-size: 0.75rem;">▼</span>
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <div class="language-option active" onclick="changeLanguage('en')">
+                            <span class="language-flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('es')">
+                            <span class="language-flag">🇪🇸</span>
+                            <span>Español</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('ja')">
+                            <span class="language-flag">🇯🇵</span>
+                            <span>日本語</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="language-flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Collection Header -->
+    <section class="collection-header">
+        <div class="main-content">
+            <a href="account.html" class="back-button">← Back to Account</a>
+            <h1 class="collection-title" id="collection-title">My Collection</h1>
+            <p class="collection-subtitle" id="collection-subtitle">Manage and view your Pokémon card collection</p>
+        </div>
+    </section>
+
+    <!-- Collection Content -->
+    <main class="collection-content">
+        <!-- Collection Stats -->
+        <div class="collection-overview">
+            <div class="collection-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-cards-stat">0</div>
+                    <div class="stat-label">Total Cards</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="unique-cards-stat">0</div>
+                    <div class="stat-label">Unique Cards</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="sets-represented">0</div>
+                    <div class="stat-label">Sets Represented</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="estimated-value">$0</div>
+                    <div class="stat-label">Estimated Value</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Collection Filters -->
+        <div class="collection-filters">
+            <input type="text" placeholder="Search your collection..." class="filter-search" id="collection-search">
+            <select class="filter-select" id="collection-set-filter">
+                <option value="">All Sets</option>
+            </select>
+            <select class="filter-select" id="collection-rarity-filter">
+                <option value="">All Rarities</option>
+                <option value="common">Common</option>
+                <option value="uncommon">Uncommon</option>
+                <option value="rare">Rare</option>
+                <option value="rare-holo">Rare Holo</option>
+                <option value="rare-ultra">Ultra Rare</option>
+            </select>
+            <select class="filter-select" id="collection-sort">
+                <option value="recent">Recently Added</option>
+                <option value="name">Card Name</option>
+                <option value="value">Estimated Value</option>
+                <option value="quantity">Quantity</option>
+            </select>
+        </div>
+
+        <!-- Collection Grid -->
+        <div class="collection-grid" id="collection-grid">
+            <!-- Cards will be populated by JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-collection" id="empty-collection" style="display: none;">
+            <div class="empty-icon">📦</div>
+            <h3>Your collection is empty</h3>
+            <p>Start adding cards to your collection by browsing sets and clicking "Add to Collection"</p>
+            <a href="index.html" class="browse-sets-btn">Browse Sets</a>
+        </div>
+    </main>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/language-selector.js"></script>
+    <script src="../js/account.js"></script>
+    <script src="../js/collection.js"></script>
+</body>
+</html>

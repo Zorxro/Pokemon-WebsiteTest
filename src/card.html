@@ -20,71 +20,177 @@
                 <a href="#sets">Sets</a>
                 <a href="#how-it-works">How it works</a>
                 <a href="#about">About</a>
+                <a href="account.html" id="user-menu-toggle" class="user-menu-link">Account</a>
             </nav>
         </div>
     </header>
 
-    <!-- Price Header -->
-    <section class="price-header">
-        <div class="main-content">
-            <a href="#" class="back-button" id="back-to-set">← Back to Set</a>
-            <h1 id="card-title">Loading...</h1>
-            <p id="card-subtitle">Card pricing information</p>
-        </div>
-    </section>
-
     <!-- Card Details and Pricing -->
     <main class="price-content">
-        <div class="card-details">
-            <div class="card-image-large" id="card-image">
-                Card Image Placeholder
+        <!-- Recent Sets Sidebar -->
+        <aside class="recent-sets-sidebar">
+            <a href="#" class="back-button" id="back-to-set">← Back to Set</a>
+            <h3>Recent Sets</h3>
+            <div class="recent-sets-list" id="recent-sets-list">
+                <!-- Will be populated by JavaScript -->
             </div>
-            <div class="price-info">
-                <h3>Current Market Prices</h3>
-                <table class="price-table">
-                    <thead>
-                        <tr>
-                            <th>Condition</th>
-                            <th>Price Range</th>
-                            <th>Last Updated</th>
-                        </tr>
-                    </thead>
-                    <tbody id="price-table-body">
-                        <tr>
-                            <td>Near Mint</td>
-                            <td>$--</td>
-                            <td>Loading...</td>
-                        </tr>
-                        <tr>
-                            <td>Lightly Played</td>
-                            <td>$--</td>
-                            <td>Loading...</td>
-                        </tr>
-                        <tr>
-                            <td>Moderately Played</td>
-                            <td>$--</td>
-                            <td>Loading...</td>
-                        </tr>
-                        <tr>
-                            <td>Heavily Played</td>
-                            <td>$--</td>
-                            <td>Loading...</td>
-                        </tr>
-                    </tbody>
-                </table>
+        </aside>
 
-                <h3>Card Information</h3>
-                <div id="card-details-info">
-                    <p><strong>Set:</strong> <span id="card-set">Loading...</span></p>
-                    <p><strong>Card Number:</strong> <span id="card-number">Loading...</span></p>
-                    <p><strong>Rarity:</strong> <span id="card-rarity">Loading...</span></p>
-                    <p><strong>Type:</strong> <span id="card-type">Loading...</span></p>
-                    <p><strong>Artist:</strong> <span id="card-artist">Loading...</span></p>
+        <!-- Main Card Content -->
+        <div class="card-main-content">
+            <!-- Breadcrumb Navigation -->
+            <nav class="breadcrumb" id="breadcrumb-nav">
+                <a href="index.html">Home</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="set.html" id="breadcrumb-set">Set</a>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-current" id="breadcrumb-card">Card</span>
+            </nav>
+
+            <!-- Top Section: Card Image and Basic Info -->
+            <div class="card-top-section">
+                <div class="card-image-section">
+                    <div class="card-image-large pokemon-card" id="card-image">
+                        Card Image Placeholder
+                    </div>
+
+                    <!-- Collection Controls -->
+                    <div class="collection-controls" id="collection-controls">
+                        <button class="collection-btn add-btn" id="add-to-collection" onclick="addToCollection()">
+                            <span class="btn-icon">+</span>
+                            Add to Collection
+                        </button>
+                        <button class="collection-btn remove-btn hidden" id="remove-from-collection" onclick="removeFromCollection()">
+                            <span class="btn-icon">−</span>
+                            Remove from Collection
+                        </button>
+                        <div class="collection-count" id="collection-count"></div>
+                    </div>
+                </div>
+
+                <div class="card-basic-info">
+                    <!-- Card Information -->
+                    <div class="pricing-section">
+                        <h3>Card Information</h3>
+                        <div class="card-info-grid" id="card-details-info">
+                            <div class="info-item">
+                                <strong>Set:</strong>
+                                <span id="card-set">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Card Number:</strong>
+                                <span id="card-number-display">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Rarity:</strong>
+                                <span id="card-rarity">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Type:</strong>
+                                <span id="card-type">Loading...</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Artist:</strong>
+                                <span id="card-artist">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- eBay Integration -->
+                    <div class="pricing-section">
+                        <h3>Market Research</h3>
+                        <button class="ebay-btn" id="view-ebay-btn" onclick="openEbayListings()">
+                            <span class="ebay-icon">🔍</span>
+                            View eBay Sold Listings
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price History Chart -->
+            <div class="price-chart-section">
+                <div class="pricing-section">
+                    <h3>Price History</h3>
+                    <div class="chart-container">
+                        <canvas id="price-history-chart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section: Pricing Tables -->
+            <div class="pricing-tables-section">
+                <!-- Raw Card Prices -->
+                <div class="pricing-section">
+                    <h3>Raw Card Prices</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Condition</th>
+                                <th>Price Range</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="raw-price-table-body">
+                            <tr>
+                                <td>Near Mint</td>
+                                <td>$--</td>
+                                <td>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td>Lightly Played</td>
+                                <td>$--</td>
+                                <td>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td>Moderately Played</td>
+                                <td>$--</td>
+                                <td>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td>Heavily Played</td>
+                                <td>$--</td>
+                                <td>Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Graded Card Prices (PSA) -->
+                <div class="pricing-section">
+                    <h3>Graded Card Prices (PSA)</h3>
+                    <table class="price-table">
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Price Range</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="graded-price-table-body">
+                            <tr>
+                                <td>PSA 10</td>
+                                <td>$--</td>
+                                <td>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td>PSA 9</td>
+                                <td>$--</td>
+                                <td>Loading...</td>
+                            </tr>
+                            <tr>
+                                <td>PSA 8</td>
+                                <td>$--</td>
+                                <td>Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/account.js"></script>
     <script src="../js/card.js"></script>
 </body>
 </html>

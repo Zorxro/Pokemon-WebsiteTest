@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pok�TCG Card Collector</title>
+    <title>Pok�TCG Card Collector</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -11,14 +11,42 @@
     <header class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <span class="brand-icon">�</span>
-                <span class="brand-text">Pok�TCG</span>
+                <span class="brand-icon">�</span>
+                <span class="brand-text">Pok�TCG</span>
                 <span class="beta-badge">Beta</span>
             </div>
             <nav class="nav-links">
-                <a href="#sets">Sets</a>
-                <a href="#how-it-works">How it works</a>
-                <a href="#about">About</a>
+                <a href="#sets" data-i18n="nav.sets">Sets</a>
+                <a href="#how-it-works" data-i18n="nav.how_it_works">How it works</a>
+                <a href="#about" data-i18n="nav.about">About</a>
+                <a href="account.html" id="user-menu-toggle" class="user-menu-link" data-i18n="nav.account">Account</a>
+
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <button class="language-toggle" onclick="toggleLanguageDropdown()">
+                        <span class="language-flag" id="current-flag">🇺🇸</span>
+                        <span class="current-language">English</span>
+                        <span style="font-size: 0.75rem;">▼</span>
+                    </button>
+                    <div class="language-dropdown" id="language-dropdown">
+                        <div class="language-option active" onclick="changeLanguage('en')">
+                            <span class="language-flag">🇺🇸</span>
+                            <span>English</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('es')">
+                            <span class="language-flag">🇪🇸</span>
+                            <span>Español</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('ja')">
+                            <span class="language-flag">🇯🇵</span>
+                            <span>日本語</span>
+                        </div>
+                        <div class="language-option" onclick="changeLanguage('fr')">
+                            <span class="language-flag">🇫🇷</span>
+                            <span>Français</span>
+                        </div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -27,7 +55,7 @@
     <section class="hero-banner">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Explore every<br>Pok�mon TCG set.</h1>
+                <h1>Explore every<br>Pok�mon TCG set.</h1>
                 <p>Browse expansions, drill into card lists, and track details  all in one fast, searchable site.</p>
                 
                 <!-- Search Bar -->
@@ -55,7 +83,7 @@
     <!-- Main Content -->
     <main class="main-content">
         <section class="sets-section">
-            <h2>All Pok�mon TCG Sets</h2>
+            <h2>All Pok�mon TCG Sets</h2>
             <p class="sets-description">Browse every set, filter by series or year, and click a set to view its cards.</p>
 
             <!-- Filters -->
@@ -92,6 +120,9 @@
         </section>
     </main>
 
+    <script src="../js/i18n.js"></script>
+    <script src="../js/language-selector.js"></script>
+    <script src="../js/account.js"></script>
     <script src="../js/script.js"></script>
 </body>
 </html>
