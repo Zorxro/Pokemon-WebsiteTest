@@ -1,5 +1,8 @@
 // Enhanced card price page JavaScript
+console.log('Card.js loaded!'); // Debug log
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded triggered in card.js'); // Debug log
     loadCardDetails();
     setupBackButton();
     loadRecentSets();
@@ -36,24 +39,35 @@ function loadCardDetails() {
 function setupBackButton() {
     const backButton = document.getElementById('back-to-set');
     const currentCard = JSON.parse(localStorage.getItem('currentCard'));
-    
+
+    console.log('Setting up back button...', backButton, currentCard); // Debug log
+
     if (backButton && currentCard) {
-        backButton.href = 'set.html';
         backButton.onclick = function(e) {
             e.preventDefault();
+            console.log('Back button clicked!'); // Debug log
+
             // Ensure the set data is still available
             const currentSet = JSON.parse(localStorage.getItem('currentSet'));
             if (!currentSet) {
+                console.log('Reconstructing set data...'); // Debug log
                 // Reconstruct set data from card info
                 const setData = {
                     id: currentCard.setId,
                     name: currentCard.set,
-                    icon: currentCard.setIcon
+                    icon: currentCard.setIcon || 'SET'
                 };
                 localStorage.setItem('currentSet', JSON.stringify(setData));
             }
+
+            console.log('Navigating to set.html...'); // Debug log
             window.location.href = 'set.html';
         };
+
+        // Also set the href as fallback
+        backButton.href = 'set.html';
+    } else {
+        console.log('Back button setup failed - button or card data missing');
     }
 }
 
@@ -543,4 +557,29 @@ function showMessage(message, type = 'success') {
             messageDiv.parentNode.removeChild(messageDiv);
         }
     }, 3000);
+}
+
+// Global function for back button (called from HTML onclick)
+function goBackToSet() {
+    console.log('goBackToSet called!'); // Debug log
+
+    const currentCard = JSON.parse(localStorage.getItem('currentCard'));
+
+    if (currentCard) {
+        // Ensure the set data is still available
+        const currentSet = JSON.parse(localStorage.getItem('currentSet'));
+        if (!currentSet) {
+            console.log('Reconstructing set data...'); // Debug log
+            // Reconstruct set data from card info
+            const setData = {
+                id: currentCard.setId,
+                name: currentCard.set,
+                icon: currentCard.setIcon || 'SET'
+            };
+            localStorage.setItem('currentSet', JSON.stringify(setData));
+        }
+    }
+
+    // Return true to allow the href to work
+    return true;
 }

@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     loadSetDetails();
     setupEventListeners();
+    loadRecentSets();
 });
 
 // Load set details from localStorage
@@ -26,15 +27,31 @@ function loadSetDetails() {
     loadCards(currentSet.id);
 }
 
-// Setup event listeners for filters
+// Setup event listeners for filters and back button
 function setupEventListeners() {
     const cardSearch = document.getElementById('card-search');
     const rarityFilter = document.getElementById('rarity-filter');
     const typeFilter = document.getElementById('type-filter');
-    
+
     if (cardSearch) cardSearch.addEventListener('input', handleCardFilters);
     if (rarityFilter) rarityFilter.addEventListener('change', handleCardFilters);
     if (typeFilter) typeFilter.addEventListener('change', handleCardFilters);
+
+    // Setup back button functionality
+    setupBackButton();
+}
+
+// Setup back button functionality
+function setupBackButton() {
+    const backButton = document.querySelector('.recent-sets-sidebar .back-button');
+
+    if (backButton) {
+        backButton.onclick = function(e) {
+            e.preventDefault();
+            // Navigate back to the main sets page
+            window.location.href = 'index.html';
+        };
+    }
 }
 
 // Load cards for the current set
@@ -167,4 +184,43 @@ function navigateToCard(card) {
     
     // Navigate to card detail page
     window.location.href = 'card.html';
+}
+
+// Load recent sets sidebar (same as card page)
+function loadRecentSets() {
+    const recentSetsList = document.getElementById('recent-sets-list');
+
+    if (!recentSetsList) return;
+
+    // Get all sets from window.pokemonSets (from script.js)
+    const allSets = window.pokemonSets ? window.pokemonSets : [];
+
+    recentSetsList.innerHTML = '';
+
+    // Show all sets
+    allSets.forEach(set => {
+        const setItem = document.createElement('a');
+        setItem.className = 'recent-set-item';
+        setItem.href = '#';
+        setItem.onclick = (e) => {
+            e.preventDefault();
+            navigateToSet(set);
+        };
+
+        setItem.innerHTML = `
+            <div class="recent-set-icon ${set.seriesCode}">${set.icon}</div>
+            <div class="recent-set-info">
+                <div class="recent-set-name">${set.name}</div>
+                <div class="recent-set-date">${set.date}</div>
+            </div>
+        `;
+
+        recentSetsList.appendChild(setItem);
+    });
+}
+
+// Navigate to set (from recent sets sidebar)
+function navigateToSet(set) {
+    localStorage.setItem('currentSet', JSON.stringify(set));
+    window.location.href = 'set.html';
 }
