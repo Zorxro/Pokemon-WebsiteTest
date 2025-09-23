@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/flyin/OneDrive/Desktop/Images/**)"
+      "Read(//c/Users/flyin/OneDrive/Desktop/Images/**)",
+      "Bash(python:*)",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []

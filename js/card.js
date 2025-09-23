@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadRecentSets();
     setupBreadcrumb();
     setupCollectionControls();
+    setupSetsSearch();
 });
 
 // Load card details from localStorage
@@ -308,17 +309,26 @@ function updateGradedPriceTable(pricing) {
 }
 
 // Load recent sets sidebar
-function loadRecentSets() {
+function loadRecentSets(searchTerm = '') {
     const recentSetsList = document.getElementById('recent-sets-list');
 
     if (!recentSetsList) return;
 
     // Get all sets from window.pokemonSets (from script.js)
-    const allSets = window.pokemonSets ? window.pokemonSets : [];
+    let allSets = window.pokemonSets ? window.pokemonSets : [];
+
+    // Filter sets based on search term
+    if (searchTerm) {
+        allSets = allSets.filter(set =>
+            set.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            set.series.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            set.icon.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }
 
     recentSetsList.innerHTML = '';
 
-    // Show all sets, not just the first 6
+    // Show filtered sets
     allSets.forEach(set => {
         const setItem = document.createElement('a');
         setItem.className = 'recent-set-item';
@@ -338,6 +348,25 @@ function loadRecentSets() {
 
         recentSetsList.appendChild(setItem);
     });
+
+    // Show message if no sets found
+    if (allSets.length === 0 && searchTerm) {
+        recentSetsList.innerHTML = '<p style="text-align: center; color: #666; font-size: 0.875rem; padding: 1rem;">No sets found matching your search.</p>';
+    }
+}
+
+// Setup sets search functionality
+function setupSetsSearch() {
+    const setsSearchInput = document.getElementById('sets-search-input');
+    if (setsSearchInput) {
+        setsSearchInput.addEventListener('input', handleSetsSearch);
+    }
+}
+
+// Handle sets search functionality
+function handleSetsSearch() {
+    const searchTerm = document.getElementById('sets-search-input').value;
+    loadRecentSets(searchTerm);
 }
 
 // Navigate to set (from recent sets sidebar)

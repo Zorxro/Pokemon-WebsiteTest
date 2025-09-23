@@ -32,10 +32,12 @@ function setupEventListeners() {
     const cardSearch = document.getElementById('card-search');
     const rarityFilter = document.getElementById('rarity-filter');
     const typeFilter = document.getElementById('type-filter');
+    const setsSearchInput = document.getElementById('sets-search-input');
 
     if (cardSearch) cardSearch.addEventListener('input', handleCardFilters);
     if (rarityFilter) rarityFilter.addEventListener('change', handleCardFilters);
     if (typeFilter) typeFilter.addEventListener('change', handleCardFilters);
+    if (setsSearchInput) setsSearchInput.addEventListener('input', handleSetsSearch);
 
     // Setup back button functionality
     setupBackButton();
@@ -187,17 +189,26 @@ function navigateToCard(card) {
 }
 
 // Load recent sets sidebar (same as card page)
-function loadRecentSets() {
+function loadRecentSets(searchTerm = '') {
     const recentSetsList = document.getElementById('recent-sets-list');
 
     if (!recentSetsList) return;
 
     // Get all sets from window.pokemonSets (from script.js)
-    const allSets = window.pokemonSets ? window.pokemonSets : [];
+    let allSets = window.pokemonSets ? window.pokemonSets : [];
+
+    // Filter sets based on search term
+    if (searchTerm) {
+        allSets = allSets.filter(set =>
+            set.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            set.series.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            set.icon.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }
 
     recentSetsList.innerHTML = '';
 
-    // Show all sets
+    // Show filtered sets
     allSets.forEach(set => {
         const setItem = document.createElement('a');
         setItem.className = 'recent-set-item';
@@ -217,6 +228,17 @@ function loadRecentSets() {
 
         recentSetsList.appendChild(setItem);
     });
+
+    // Show message if no sets found
+    if (allSets.length === 0 && searchTerm) {
+        recentSetsList.innerHTML = '<p style="text-align: center; color: #666; font-size: 0.875rem; padding: 1rem;">No sets found matching your search.</p>';
+    }
+}
+
+// Handle sets search functionality
+function handleSetsSearch() {
+    const searchTerm = document.getElementById('sets-search-input').value;
+    loadRecentSets(searchTerm);
 }
 
 // Navigate to set (from recent sets sidebar)

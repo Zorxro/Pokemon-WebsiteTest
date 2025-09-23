@@ -10,11 +10,11 @@
     <!-- Navigation Header -->
     <header class="navbar">
         <div class="nav-container">
-            <div class="nav-brand">
+            <a href="index.html" class="nav-brand">
                 <span class="brand-icon">⚡</span>
                 <span class="brand-text">PokéTCG</span>
                 <span class="beta-badge">Beta</span>
-            </div>
+            </a>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="#sets">Sets</a>
@@ -31,6 +31,7 @@
         <aside class="recent-sets-sidebar">
             <a href="set.html" class="back-button" id="back-to-set" onclick="return goBackToSet()">← Back to Set</a>
             <h3>Recent Sets</h3>
+            <input type="text" placeholder="Search sets..." class="sets-search-input" id="sets-search-input">
             <div class="recent-sets-list" id="recent-sets-list">
                 <!-- Will be populated by JavaScript -->
             </div>
