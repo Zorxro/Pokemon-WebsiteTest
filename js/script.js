@@ -1680,21 +1680,17 @@ function setupEventListeners() {
     sortFilter.addEventListener('change', handleFilters);
     groupBySeriesCheckbox.addEventListener('change', handleFilters);
     
-    // Quick pick buttons
-    document.querySelectorAll('.tag-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const series = this.getAttribute('data-series');
-            seriesFilter.value = series;
-            handleFilters();
-        });
-    });
 
-    // Search bar in hero section
-    document.querySelector('.search-btn').addEventListener('click', function() {
-        const searchTerm = document.querySelector('.search-input').value;
-        filterSearch.value = searchTerm;
-        handleSearch();
-    });
+    // Search bar in hero section (only if elements exist)
+    const searchBtn = document.querySelector('.search-btn');
+    const searchInput = document.querySelector('.search-input');
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', function() {
+            const searchTerm = searchInput.value;
+            filterSearch.value = searchTerm;
+            handleSearch();
+        });
+    }
 }
 
 // Handle search functionality
@@ -1811,18 +1807,116 @@ function createSetCard(set) {
     const setCard = document.createElement('div');
     setCard.className = 'set-card';
     setCard.onclick = () => navigateToSet(set);
-    
+
+    // Generate logo path based on series and set name
+    const logoPath = getLogoPath(set);
+
     setCard.innerHTML = `
-        <div class="set-icon ${set.seriesCode}">${set.icon}</div>
-        <div class="set-name">${set.name}</div>
-        <div class="set-series">${set.series}</div>
+        <div class="set-logo-container">
+            <img src="${logoPath}" alt="${set.name} logo" class="set-logo" onerror="this.style.display='none'; this.nextElementSibling.style.marginTop='2rem';" />
+            <div class="set-subtitle">${set.name}</div>
+        </div>
         <div class="set-meta">
             <span class="set-date">${set.date}</span>
             <span class="set-count">${set.cardCount} cards</span>
         </div>
     `;
-    
+
     return setCard;
+}
+
+// Helper function to get logo path based on series and set name
+function getLogoPath(set) {
+    const seriesMap = {
+        'mega': 'mega-evolutions',
+        'sv': 'scarlet-violet',
+        'swsh': 'sword-shield',
+        'sm': 'sun-moon',
+        'xy': 'xy',
+        'bw': 'black-white',
+        'bwp': 'black-white',
+        'col': 'black-white', // Call of Legends era
+        'hgss': 'heartgold-soulsilver',
+        'pl': 'platinum',
+        'np': 'nintendo',
+        'dp': 'diamond-pearl',
+        'ex': 'ex',
+        'ecard': 'e-card',
+        'lc': 'legendary-collection',
+        'neo': 'neo',
+        'topps': 'gym', // Topps maps to gym era
+        'gym': 'gym',
+        'base': 'base'
+    };
+
+    const seriesFolder = seriesMap[set.seriesCode] || 'base';
+
+    // Special name mappings for exact matches
+    const nameOverrides = {
+        // Mega Evolution series
+        'Mega Evolution Black Star Promos': 'mega-evolutions', // Use main logo as fallback
+        'Mega Evolution': 'mega-evolutions',
+
+        // Scarlet & Violet
+        'Scarlet & Violet - 151': '151',
+        'McDonald\'s Dragon Discovery': 'mcdonald_s-dragon-discovery',
+        'McDonald\'s Match Battle 2023': 'mcdonald_s-match-battle-2023',
+
+        // Sword & Shield
+        'Champion\'s Path': 'champion_s-path',
+        'Pokemon Go': 'pokemon-go',
+        'McDonald\'s 25th Anniversary': 'ss-mcdonald_s-collection-25th-anniversary',
+        'McDonald\'s Match Battle': 'match-battle-2022',
+        'Pokemon Futsal Promos': 'fustal-promos',
+
+        // McDonald's Collections
+        'McDonald\'s Collection (2019)': 'sm-mcdonald_s-collection',
+        'McDonald\'s Collection (2018)': 'sm-mcdonald_s-collection',
+        'McDonald\'s Collection (2017)': 'sm-mcdonald_s-collection',
+        'McDonald\'s Collection (2016)': 'xy-mcdonald_s-collection',
+        'McDonald\'s Collection (2015)': 'xy-mcdonald_s-collection',
+        'McDonald\'s Collection (2014)': 'xy-mcdonald_s-collection',
+        'McDonald\'s Collection (2013)': 'bw-mcdonald_s-collection',
+        'McDonald\'s Collection (2012)': 'bw-mcdonald_s-collection',
+        'McDonald\'s Collection (2011)': 'bw-mcdonald_s-collection',
+
+        // XY series
+        'XY Flashfire': 'flashfire',
+        'XY BREAKthrough': 'breakthrough',
+
+        // EX series
+        'EX Ruby & Sapphire': 'ruby-sapphire',
+        'EX FireRed & LeafGreen': 'firered-leafgreen',
+        'EX Team Magma vs Team Aqua': 'team-magma-vs-team-aqua',
+
+        // Diamond & Pearl
+        'Diamond & Pearl': 'diamond-and-pearl',
+        'DP Black Star Promos': 'diamond-and-pearl-promos',
+
+        // Base/Classic
+        'Base Set': 'base',
+        'Base Set 2': 'base-set-2',
+        'Jungle': 'jungle',
+        'Fossil': 'fossil',
+        'Team Rocket': 'team-rocket',
+        'Wizards of the Coast Promos': 'wotc-promos'
+    };
+
+    // Check for exact name override first
+    if (nameOverrides[set.name]) {
+        return `logos/${seriesFolder}/${nameOverrides[set.name]}.png`;
+    }
+
+    // Convert set name to filename format (lowercase, hyphens instead of spaces and special chars)
+    let fileName = set.name
+        .toLowerCase()
+        .replace(/[&']/g, '') // Remove ampersands and apostrophes
+        .replace(/[\s\-]+/g, '-') // Replace spaces and hyphens with single hyphen
+        .replace(/[^\w\-]/g, '') // Remove any other special characters
+        .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+        .replace(/-+/g, '-'); // Replace multiple hyphens with single
+
+    return `logos/${seriesFolder}/${fileName}.png`;
 }
 
 // Navigate to set detail page

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logo Path Debug Test</title>
+    <style>
+        .debug-container {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+        }
+        .test-logo {
+            max-width: 200px;
+            max-height: 100px;
+            margin: 10px;
+            border: 2px solid #ddd;
+        }
+        .test-item {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #3b82f6;
+        }
+        .success { border-left-color: #10b981; background: #f0fdf4; }
+        .error { border-left-color: #ef4444; background: #fef2f2; }
+        .path { font-family: monospace; background: #e5e7eb; padding: 5px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🔍 Logo Loading Debug Test</h1>
+        <p><strong>Current page URL:</strong> <span id="current-url"></span></p>
+
+        <div class="test-item">
+            <h3>Test 1: Relative path from root</h3>
+            <p class="path">src/logos/scarlet-violet/surging-sparks.png</p>
+            <img src="src/logos/scarlet-violet/surging-sparks.png" class="test-logo"
+                 onload="this.parentNode.className+=' success';"
+                 onerror="this.parentNode.className+=' error'; this.style.display='none';" />
+            <p class="result"></p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 2: Direct relative path</h3>
+            <p class="path">./src/logos/scarlet-violet/surging-sparks.png</p>
+            <img src="./src/logos/scarlet-violet/surging-sparks.png" class="test-logo"
+                 onload="this.parentNode.className+=' success';"
+                 onerror="this.parentNode.className+=' error'; this.style.display='none';" />
+        </div>
+
+        <div class="test-item">
+            <h3>Test 3: From main website perspective</h3>
+            <p class="path">logos/scarlet-violet/surging-sparks.png (if opened from src/ folder)</p>
+            <img src="logos/scarlet-violet/surging-sparks.png" class="test-logo"
+                 onload="this.parentNode.className+=' success';"
+                 onerror="this.parentNode.className+=' error'; this.style.display='none';" />
+        </div>
+
+        <div class="test-item">
+            <h3>Test 4: Another logo test</h3>
+            <p class="path">src/logos/scarlet-violet/stellar-crown.png</p>
+            <img src="src/logos/scarlet-violet/stellar-crown.png" class="test-logo"
+                 onload="this.parentNode.className+=' success';"
+                 onerror="this.parentNode.className+=' error'; this.style.display='none';" />
+        </div>
+
+        <h2>JavaScript Generated Path Test</h2>
+        <div id="js-test"></div>
+
+        <script>
+            document.getElementById('current-url').textContent = window.location.href;
+
+            // Test the exact same logic as the main site
+            function getLogoPath(setName, seriesCode) {
+                const seriesMap = {
+                    'sv': 'scarlet-violet',
+                    'swsh': 'sword-shield'
+                };
+                const seriesFolder = seriesMap[seriesCode] || 'base';
+                const fileName = setName.toLowerCase().replace(/[&']/g, '').replace(/[\s\-]+/g, '-').replace(/[^\w\-]/g, '').replace(/^-+|-+$/g, '').replace(/-+/g, '-');
+                return `src/logos/${seriesFolder}/${fileName}.png`;
+            }
+
+            const testPath = getLogoPath('Surging Sparks', 'sv');
+            document.getElementById('js-test').innerHTML = `
+                <div class="test-item">
+                    <h3>JavaScript Generated Path</h3>
+                    <p class="path">${testPath}</p>
+                    <img src="${testPath}" class="test-logo"
+                         onload="this.parentNode.className+=' success';"
+                         onerror="this.parentNode.className+=' error'; this.style.display='none';" />
+                </div>
+            `;
+        </script>
+    </div>
+</body>
+</html>

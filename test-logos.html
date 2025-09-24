@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logo Test</title>
+    <style>
+        .test-container {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .test-logo {
+            max-width: 200px;
+            max-height: 100px;
+            margin: 10px;
+            border: 2px solid #ddd;
+        }
+        .test-item {
+            margin: 20px 0;
+            padding: 10px;
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Logo Loading Test</h1>
+
+        <div class="test-item">
+            <h3>Test 1: Surging Sparks (Scarlet & Violet)</h3>
+            <p>Path: src/logos/scarlet-violet/surging-sparks.png</p>
+            <img src="src/logos/scarlet-violet/surging-sparks.png" class="test-logo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <p style="color: red; display: none;">❌ Failed to load</p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 2: Scarlet & Violet Base</h3>
+            <p>Path: src/logos/scarlet-violet/scarlet-violet.png</p>
+            <img src="src/logos/scarlet-violet/scarlet-violet.png" class="test-logo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <p style="color: red; display: none;">❌ Failed to load</p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 3: Sword & Shield</h3>
+            <p>Path: src/logos/sword-shield/sword-shield.png</p>
+            <img src="src/logos/sword-shield/sword-shield.png" class="test-logo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <p style="color: red; display: none;">❌ Failed to load</p>
+        </div>
+
+        <div class="test-item">
+            <h3>Test 4: Direct path test</h3>
+            <p>Try opening this path in your browser:</p>
+            <p><strong>src/logos/scarlet-violet/surging-sparks.png</strong></p>
+        </div>
+
+        <script>
+            console.log("Logo test page loaded");
+            console.log("Current location:", window.location.href);
+        </script>
+    </div>
+</body>
+</html>

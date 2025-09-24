@@ -3,7 +3,8 @@
     "allow": [
       "Read(//c/Users/flyin/OneDrive/Desktop/Images/**)",
       "Bash(python:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
